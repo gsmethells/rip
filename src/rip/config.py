@@ -14,9 +14,8 @@ compatibility with the original Perl version's config format.
 """
 
 import configparser
-from pathlib import Path
-
 import rip.exceptions as exceptions
+from pathlib import Path
 
 
 class Config:

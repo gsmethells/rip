@@ -14,11 +14,10 @@ Automatically discovers available encoders and wraps them with a unified interfa
 """
 
 import logging
-import subprocess
-from pathlib import Path
-
 import rip.exceptions as exceptions
 import rip.utils as utils
+import subprocess
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

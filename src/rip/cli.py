@@ -14,15 +14,14 @@ Provides the main entry point and argument parsing for the rip CD ripper.
 
 import argparse
 import logging
-import sys
-from pathlib import Path
-
 import rip
 import rip.config as config
 import rip.encoder as encoder
 import rip.exceptions as exceptions
 import rip.ripper as ripper
 import rip.utils as utils
+import sys
+from pathlib import Path
 
 
 def setupLogging(verbose=False, quiet=False):

@@ -14,11 +14,10 @@ available rippers and wraps them with a unified interface.
 """
 
 import logging
-import subprocess
-from pathlib import Path
-
 import rip.exceptions as exceptions
 import rip.utils as utils
+import subprocess
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

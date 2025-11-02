@@ -15,10 +15,9 @@ device discovery, and path handling.
 
 import os
 import re
+import rip.exceptions as exceptions
 import shutil
 from pathlib import Path
-
-import rip.exceptions as exceptions
 
 
 def parseTracks(trackArgs):
