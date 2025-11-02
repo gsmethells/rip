@@ -15,6 +15,7 @@ compatibility with the original Perl version's config format.
 
 import configparser
 from pathlib import Path
+
 import rip.exceptions as exceptions
 
 
@@ -60,7 +61,7 @@ class Config:
 
   def _createDefaultConfig(self):
     """Create default ~/.riprc configuration file."""
-    defaultContent = '''# ALTER THIS FILE AT YOUR OWN RISK!
+    defaultContent = """# ALTER THIS FILE AT YOUR OWN RISK!
 
 # RC FILE VERSION 3 (Python)
 
@@ -90,7 +91,7 @@ dev = "/dev/cdrom"
 
 # Debug mode (set to "true" to keep debug files)
 debug = ""
-'''
+"""
     self.rcfile.write_text(defaultContent, encoding='utf-8')
     self._loadConfig()
 

@@ -68,6 +68,9 @@ select = [
 ]
 ignore = [
   'E501',  # Line too long (handled by formatter)
+  'N802',  # Function name should be lowercase (we use camelCase per CLAUDE.md)
+  'N803',  # Argument name should be lowercase (we use camelCase per CLAUDE.md)
+  'N806',  # Variable in function should be lowercase (we use camelCase per CLAUDE.md)
 ]
 
 [tool.ruff.format]
@@ -81,5 +84,5 @@ python_classes = ['Test*']
 python_functions = ['test_*']
 addopts = '-v --strict-markers'
 markers = [
-  'integration: marks tests as integration tests (deselect with \'-m \"not integration\"\')',
+  'integration: marks tests as integration tests (deselect with -m "not integration")',
 ]

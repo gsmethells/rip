@@ -16,9 +16,9 @@ available rippers and wraps them with a unified interface.
 import logging
 import subprocess
 from pathlib import Path
+
 import rip.exceptions as exceptions
 import rip.utils as utils
-
 
 logger = logging.getLogger(__name__)
 
@@ -80,9 +80,7 @@ class Ripper:
         logger.info(f'Found ripper: {tool} at {toolPath}')
         return
 
-    raise exceptions.RipperNotFoundError(
-      'No CD ripper found. Please install cdparanoia or cdda2wav.'
-    )
+    raise exceptions.RipperNotFoundError('No CD ripper found. Please install cdparanoia or cdda2wav.')
 
   def ripTrack(self, trackNum, outputPath):
     """
@@ -137,18 +135,11 @@ class Ripper:
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
-      result = subprocess.run(
-        cmd,
-        check=True,
-        capture_output=True,
-        text=True
-      )
+      result = subprocess.run(cmd, check=True, capture_output=True, text=True)
       if not self.quiet and result.stderr:
         logger.info(result.stderr)
     except subprocess.CalledProcessError as e:
-      raise exceptions.TrackError(
-        f'Failed to rip track {trackNum}: {e.stderr}'
-      ) from e
+      raise exceptions.TrackError(f'Failed to rip track {trackNum}: {e.stderr}') from e
 
   def _ripWithCdda2wav(self, trackNum, outputPath):
     """
@@ -161,13 +152,7 @@ class Ripper:
     :raises: TrackError if ripping fails
     """
     outputBase = str(outputPath.with_suffix(''))
-    cmd = [
-      self.toolPath,
-      '-D', str(self.device),
-      '-t', str(trackNum),
-      '-O', 'wav',
-      outputBase
-    ]
+    cmd = [self.toolPath, '-D', str(self.device), '-t', str(trackNum), '-O', 'wav', outputBase]
 
     if self.speed:
       cmd.extend(['-S', str(self.speed)])
@@ -185,18 +170,11 @@ class Ripper:
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
-      result = subprocess.run(
-        cmd,
-        check=True,
-        capture_output=True,
-        text=True
-      )
+      result = subprocess.run(cmd, check=True, capture_output=True, text=True)
       if not self.quiet and result.stderr:
         logger.info(result.stderr)
     except subprocess.CalledProcessError as e:
-      raise exceptions.TrackError(
-        f'Failed to rip track {trackNum}: {e.stderr}'
-      ) from e
+      raise exceptions.TrackError(f'Failed to rip track {trackNum}: {e.stderr}') from e
 
   def queryTracks(self):
     """
@@ -222,12 +200,7 @@ class Ripper:
     cmd = [self.toolPath, '-d', str(self.device), '-Q']
 
     try:
-      result = subprocess.run(
-        cmd,
-        check=True,
-        capture_output=True,
-        text=True
-      )
+      result = subprocess.run(cmd, check=True, capture_output=True, text=True)
       lines = result.stderr.split('\n')
       trackCount = 0
 
@@ -252,12 +225,7 @@ class Ripper:
     cmd = [self.toolPath, '-D', str(self.device), '-J', '-g']
 
     try:
-      result = subprocess.run(
-        cmd,
-        check=True,
-        capture_output=True,
-        text=True
-      )
+      result = subprocess.run(cmd, check=True, capture_output=True, text=True)
       lines = result.stdout.split('\n')
       trackCount = 0
 

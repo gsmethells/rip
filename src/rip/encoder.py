@@ -16,9 +16,9 @@ Automatically discovers available encoders and wraps them with a unified interfa
 import logging
 import subprocess
 from pathlib import Path
+
 import rip.exceptions as exceptions
 import rip.utils as utils
-
 
 logger = logging.getLogger(__name__)
 
@@ -84,9 +84,7 @@ class Encoder:
         logger.info(f'Found encoder: {self.LAME} at {toolPath}')
         return
 
-      raise exceptions.EncoderNotFoundError(
-        f'No MP3 encoder found. Please install lame.'
-      )
+      raise exceptions.EncoderNotFoundError('No MP3 encoder found. Please install lame.')
     elif self.format == self.FORMAT_FLAC:
       toolPath = utils.findTool(self.FLAC)
       if toolPath:
@@ -95,9 +93,7 @@ class Encoder:
         logger.info(f'Found encoder: {self.FLAC} at {toolPath}')
         return
 
-      raise exceptions.EncoderNotFoundError(
-        f'No FLAC encoder found. Please install flac.'
-      )
+      raise exceptions.EncoderNotFoundError('No FLAC encoder found. Please install flac.')
     elif self.format == self.FORMAT_OPUS:
       toolPath = utils.findTool(self.OPUSENC)
       if toolPath:
@@ -106,9 +102,7 @@ class Encoder:
         logger.info(f'Found encoder: {self.OPUSENC} at {toolPath}')
         return
 
-      raise exceptions.EncoderNotFoundError(
-        f'No Opus encoder found. Please install opus-tools.'
-      )
+      raise exceptions.EncoderNotFoundError('No Opus encoder found. Please install opus-tools.')
     elif self.format == self.FORMAT_OGG:
       toolPath = utils.findTool(self.OGGENC)
       if toolPath:
@@ -117,9 +111,7 @@ class Encoder:
         logger.info(f'Found encoder: {self.OGGENC} at {toolPath}')
         return
 
-      raise exceptions.EncoderNotFoundError(
-        f'No Ogg Vorbis encoder found. Please install vorbis-tools.'
-      )
+      raise exceptions.EncoderNotFoundError('No Ogg Vorbis encoder found. Please install vorbis-tools.')
     elif self.format == self.FORMAT_M4A:
       for tool in [self.FDKAAC, self.QAAC]:
         toolPath = utils.findTool(tool)
@@ -129,9 +121,7 @@ class Encoder:
           logger.info(f'Found encoder: {tool} at {toolPath}')
           return
 
-      raise exceptions.EncoderNotFoundError(
-        f'No AAC encoder found. Please install fdkaac or qaac.'
-      )
+      raise exceptions.EncoderNotFoundError('No AAC encoder found. Please install fdkaac or qaac.')
     else:
       raise exceptions.EncodingError(f'Unsupported format: {self.format}')
 
@@ -188,15 +178,13 @@ class Encoder:
     cmd.append(str(inputPath))
     cmd.append(str(outputPath))
 
-    logger.info(f'Encoding to MP3 with LAME')
+    logger.info('Encoding to MP3 with LAME')
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
       subprocess.run(cmd, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
-      raise exceptions.EncodingError(
-        f'LAME encoding failed: {e.stderr}'
-      ) from e
+      raise exceptions.EncodingError(f'LAME encoding failed: {e.stderr}') from e
 
   def _encodeWithFlac(self, inputPath, outputPath):
     """
@@ -222,15 +210,13 @@ class Encoder:
     cmd.extend(['-o', str(outputPath)])
     cmd.append(str(inputPath))
 
-    logger.info(f'Encoding to FLAC')
+    logger.info('Encoding to FLAC')
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
       subprocess.run(cmd, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
-      raise exceptions.EncodingError(
-        f'FLAC encoding failed: {e.stderr}'
-      ) from e
+      raise exceptions.EncodingError(f'FLAC encoding failed: {e.stderr}') from e
 
   def _encodeWithOpusenc(self, inputPath, outputPath):
     """
@@ -256,15 +242,13 @@ class Encoder:
     cmd.append(str(inputPath))
     cmd.append(str(outputPath))
 
-    logger.info(f'Encoding to Opus with opusenc')
+    logger.info('Encoding to Opus with opusenc')
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
       subprocess.run(cmd, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
-      raise exceptions.EncodingError(
-        f'opusenc encoding failed: {e.stderr}'
-      ) from e
+      raise exceptions.EncodingError(f'opusenc encoding failed: {e.stderr}') from e
 
   def _encodeWithOggenc(self, inputPath, outputPath):
     """
@@ -290,15 +274,13 @@ class Encoder:
     cmd.extend(['-o', str(outputPath)])
     cmd.append(str(inputPath))
 
-    logger.info(f'Encoding to Ogg Vorbis with oggenc')
+    logger.info('Encoding to Ogg Vorbis with oggenc')
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
       subprocess.run(cmd, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
-      raise exceptions.EncodingError(
-        f'oggenc encoding failed: {e.stderr}'
-      ) from e
+      raise exceptions.EncodingError(f'oggenc encoding failed: {e.stderr}') from e
 
   def _encodeWithAac(self, inputPath, outputPath):
     """
@@ -339,9 +321,7 @@ class Encoder:
     try:
       subprocess.run(cmd, check=True, capture_output=True, text=True)
     except subprocess.CalledProcessError as e:
-      raise exceptions.EncodingError(
-        f'{self.tool} encoding failed: {e.stderr}'
-      ) from e
+      raise exceptions.EncodingError(f'{self.tool} encoding failed: {e.stderr}') from e
 
   def getExtension(self):
     """
