@@ -50,6 +50,7 @@ class Ripper:
     :raises: RipperNotFoundError if no ripper found
     :raises: DeviceError if device does not exist
     """
+
     self.device = Path(device)
     self.paranoia = paranoia
     self.speed = speed
@@ -71,11 +72,14 @@ class Ripper:
 
     :raises: RipperNotFoundError if no ripper found
     """
+
     for tool in [self.CDPARANOIA, self.CDDA2WAV]:
       toolPath = utils.findTool(tool)
+
       if toolPath:
         self.tool = tool
         self.toolPath = toolPath
+
         logger.info(f'Found ripper: {tool} at {toolPath}')
         return
 
@@ -91,6 +95,7 @@ class Ripper:
     :type outputPath: Path or str
     :raises: TrackError if ripping fails
     """
+
     outputPath = Path(outputPath)
 
     if self.tool == self.CDPARANOIA:
@@ -110,6 +115,7 @@ class Ripper:
     :type outputPath: Path
     :raises: TrackError if ripping fails
     """
+
     cmd = [self.toolPath]
 
     if self.paranoia:
@@ -129,12 +135,12 @@ class Ripper:
     cmd.extend(['-d', str(self.device)])
     cmd.append(str(trackNum))
     cmd.append(str(outputPath))
-
     logger.info(f'Ripping track {trackNum} with cdparanoia')
     logger.debug(f'Command: {" ".join(cmd)}')
 
     try:
       result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+
       if not self.quiet and result.stderr:
         logger.info(result.stderr)
     except subprocess.CalledProcessError as e:
@@ -150,6 +156,7 @@ class Ripper:
     :type outputPath: Path
     :raises: TrackError if ripping fails
     """
+
     outputBase = str(outputPath.with_suffix(''))
     cmd = [self.toolPath, '-D', str(self.device), '-t', str(trackNum), '-O', 'wav', outputBase]
 
@@ -170,6 +177,7 @@ class Ripper:
 
     try:
       result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+
       if not self.quiet and result.stderr:
         logger.info(result.stderr)
     except subprocess.CalledProcessError as e:
@@ -182,6 +190,7 @@ class Ripper:
     :rtype: int
     :raises: TrackError if query fails
     """
+
     if self.tool == self.CDPARANOIA:
       return self._queryTracksWithCdparanoia()
     elif self.tool == self.CDDA2WAV:
@@ -196,6 +205,7 @@ class Ripper:
     :rtype: int
     :raises: TrackError if query fails
     """
+
     cmd = [self.toolPath, '-d', str(self.device), '-Q']
 
     try:
@@ -206,6 +216,7 @@ class Ripper:
       for line in lines:
         if line.strip() and line[0].isdigit():
           parts = line.split('.')
+
           if parts and parts[0].strip().isdigit():
             trackNum = int(parts[0].strip())
             trackCount = max(trackCount, trackNum)
@@ -221,6 +232,7 @@ class Ripper:
     :rtype: int
     :raises: TrackError if query fails
     """
+
     cmd = [self.toolPath, '-D', str(self.device), '-J', '-g']
 
     try:
@@ -231,8 +243,10 @@ class Ripper:
       for line in lines:
         if 'Tracks:' in line:
           parts = line.split(':')
+
           if len(parts) > 1:
             trackCount = int(parts[1].strip())
+
             break
 
       return trackCount

@@ -28,8 +28,10 @@ class Config:
 
   def __init__(self):
     """Initialize config and load from ~/.riprc."""
+
     self.rcfile = Path.home() / '.riprc'
     self.preferences = {}
+
     self._loadConfig()
 
   def _loadConfig(self):
@@ -41,12 +43,14 @@ class Config:
 
     :raises: ConfigError if config file cannot be read
     """
+
     if not self.rcfile.exists():
       self._createDefaultConfig()
       return
 
     try:
       config = configparser.ConfigParser()
+
       with open(self.rcfile, encoding='utf-8') as f:
         configContent = f.read()
 
@@ -60,6 +64,7 @@ class Config:
 
   def _createDefaultConfig(self):
     """Create default ~/.riprc configuration file."""
+
     defaultContent = """# ALTER THIS FILE AT YOUR OWN RISK!
 
 # RC FILE VERSION 3 (Python)
@@ -91,6 +96,7 @@ dev = "/dev/cdrom"
 # Debug mode (set to "true" to keep debug files)
 debug = ""
 """
+
     self.rcfile.write_text(defaultContent, encoding='utf-8')
     self._loadConfig()
 
@@ -104,6 +110,7 @@ debug = ""
     :type default: any
     :rtype: str or None
     """
+
     return self.preferences.get(key, default)
 
   def getInt(self, key, default=0):
@@ -116,7 +123,9 @@ debug = ""
     :type default: int
     :rtype: int
     """
+
     value = self.get(key)
+
     if value is None:
       return default
 
@@ -137,7 +146,9 @@ debug = ""
     :type default: bool
     :rtype: bool
     """
+
     value = self.get(key)
+
     if value is None:
       return default
 
@@ -155,7 +166,9 @@ debug = ""
     :type default: list or None
     :rtype: list
     """
+
     value = self.get(key)
+
     if value is None:
       return default if default is not None else []
 

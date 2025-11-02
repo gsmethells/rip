@@ -36,6 +36,7 @@ def parseTracks(trackArgs):
   :rtype: list
   :raises: TrackError if track format is invalid
   """
+
   tracks = set()
 
   for arg in trackArgs:
@@ -57,6 +58,7 @@ def parseTracks(trackArgs):
     else:
       try:
         trackNum = int(arg)
+
         if trackNum < 1 or trackNum > 99:
           raise exceptions.TrackError(f'Track number must be between 1 and 99: {trackNum}')
 
@@ -80,12 +82,11 @@ def sanitizeFilename(filename, useUnderscore=True):
   :type useUnderscore: bool
   :rtype: str
   """
-  safe = filename
 
+  safe = filename
   safe = re.sub(r'[<>:"|?*\x00-\x1f]', '', safe)
   safe = re.sub(r'[/\\]', '-', safe)
   safe = re.sub(r'[;\[\]\{\}`$!&]', '', safe)
-
   safe = safe.strip()
   safe = re.sub(r'\.+$', '', safe)
 
@@ -106,20 +107,25 @@ def findCdDevices():
 
   :rtype: list
   """
+
   devices = []
   commonPaths = ['/dev/cdrom', '/dev/dvd', '/dev/sr0', '/dev/sr1', '/dev/sr2']
 
   for path in commonPaths:
     devicePath = Path(path)
+
     if devicePath.exists():
       devices.append(devicePath)
 
   diskByIdDir = Path('/dev/disk/by-id')
+
   if diskByIdDir.exists():
     for device in diskByIdDir.glob('usb-*'):
       deviceName = device.name.lower()
+
       if 'cd' in deviceName or 'dvd' in deviceName:
         realDevice = device.resolve()
+
         if realDevice not in devices:
           devices.append(realDevice)
 
@@ -135,7 +141,9 @@ def findTool(toolName):
   :rtype: str or None
   :return: Full path to tool if found, None otherwise
   """
+
   toolPath = shutil.which(toolName)
+
   return toolPath
 
 
@@ -147,8 +155,10 @@ def formatDuration(seconds):
   :type seconds: int or float
   :rtype: str
   """
+
   minutes = int(seconds // 60)
   secs = int(seconds % 60)
+
   return f'{minutes:02d}:{secs:02d}'
 
 
@@ -160,7 +170,9 @@ def ensureDirectory(dirPath):
   :type dirPath: Path or str
   :raises: OSError if directory cannot be created
   """
+
   path = Path(dirPath)
+
   path.mkdir(parents=True, exist_ok=True)
 
 
@@ -174,5 +186,7 @@ def getTempWavPath(trackNum):
   :type trackNum: int
   :rtype: Path
   """
+
   pid = os.getpid()
+
   return Path(f'rip_temp_{pid}_{trackNum}.wav')

@@ -35,7 +35,6 @@ class Encoder:
   FORMAT_OPUS = 'opus'
   FORMAT_OGG = 'ogg'
   FORMAT_M4A = 'm4a'
-
   LAME = 'lame'
   FLAC = 'flac'
   OPUSENC = 'opusenc'
@@ -59,6 +58,7 @@ class Encoder:
     :type quiet: bool
     :raises: EncoderNotFoundError if no encoder found for format
     """
+
     self.format = format.lower()
     self.bitrate = bitrate
     self.quality = quality
@@ -75,38 +75,47 @@ class Encoder:
 
     :raises: EncoderNotFoundError if no encoder found
     """
+
     if self.format == self.FORMAT_MP3:
       toolPath = utils.findTool(self.LAME)
+
       if toolPath:
         self.tool = self.LAME
         self.toolPath = toolPath
+
         logger.info(f'Found encoder: {self.LAME} at {toolPath}')
         return
 
       raise exceptions.EncoderNotFoundError('No MP3 encoder found. Please install lame.')
     elif self.format == self.FORMAT_FLAC:
       toolPath = utils.findTool(self.FLAC)
+
       if toolPath:
         self.tool = self.FLAC
         self.toolPath = toolPath
+
         logger.info(f'Found encoder: {self.FLAC} at {toolPath}')
         return
 
       raise exceptions.EncoderNotFoundError('No FLAC encoder found. Please install flac.')
     elif self.format == self.FORMAT_OPUS:
       toolPath = utils.findTool(self.OPUSENC)
+
       if toolPath:
         self.tool = self.OPUSENC
         self.toolPath = toolPath
+
         logger.info(f'Found encoder: {self.OPUSENC} at {toolPath}')
         return
 
       raise exceptions.EncoderNotFoundError('No Opus encoder found. Please install opus-tools.')
     elif self.format == self.FORMAT_OGG:
       toolPath = utils.findTool(self.OGGENC)
+
       if toolPath:
         self.tool = self.OGGENC
         self.toolPath = toolPath
+
         logger.info(f'Found encoder: {self.OGGENC} at {toolPath}')
         return
 
@@ -114,9 +123,11 @@ class Encoder:
     elif self.format == self.FORMAT_M4A:
       for tool in [self.FDKAAC, self.QAAC]:
         toolPath = utils.findTool(tool)
+
         if toolPath:
           self.tool = tool
           self.toolPath = toolPath
+
           logger.info(f'Found encoder: {tool} at {toolPath}')
           return
 
@@ -134,6 +145,7 @@ class Encoder:
     :type outputPath: Path or str
     :raises: EncodingError if encoding fails
     """
+
     inputPath = Path(inputPath)
     outputPath = Path(outputPath)
 
@@ -163,10 +175,12 @@ class Encoder:
     :type outputPath: Path
     :raises: EncodingError if encoding fails
     """
+
     cmd = [self.toolPath]
 
     if self.vbr or self.quality is not None:
       quality = self.quality if self.quality is not None else 2
+
       cmd.extend(['-V', str(quality)])
     else:
       cmd.extend(['-b', str(self.bitrate)])
@@ -176,7 +190,6 @@ class Encoder:
 
     cmd.append(str(inputPath))
     cmd.append(str(outputPath))
-
     logger.info('Encoding to MP3 with LAME')
     logger.debug(f'Command: {" ".join(cmd)}')
 
@@ -195,9 +208,10 @@ class Encoder:
     :type outputPath: Path
     :raises: EncodingError if encoding fails
     """
-    cmd = [self.toolPath]
 
+    cmd = [self.toolPath]
     compressionLevel = 5
+
     if self.quality is not None:
       compressionLevel = max(0, min(8, self.quality))
 
@@ -208,7 +222,6 @@ class Encoder:
 
     cmd.extend(['-o', str(outputPath)])
     cmd.append(str(inputPath))
-
     logger.info('Encoding to FLAC')
     logger.debug(f'Command: {" ".join(cmd)}')
 
@@ -227,10 +240,12 @@ class Encoder:
     :type outputPath: Path
     :raises: EncodingError if encoding fails
     """
+
     cmd = [self.toolPath]
 
     if self.vbr or self.quality is not None:
       quality = self.quality if self.quality is not None else 6
+
       cmd.extend(['--vbr', '--comp', str(quality)])
     else:
       cmd.extend(['--bitrate', str(self.bitrate)])
@@ -240,7 +255,6 @@ class Encoder:
 
     cmd.append(str(inputPath))
     cmd.append(str(outputPath))
-
     logger.info('Encoding to Opus with opusenc')
     logger.debug(f'Command: {" ".join(cmd)}')
 
@@ -259,10 +273,12 @@ class Encoder:
     :type outputPath: Path
     :raises: EncodingError if encoding fails
     """
+
     cmd = [self.toolPath]
 
     if self.vbr or self.quality is not None:
       quality = self.quality if self.quality is not None else 6
+
       cmd.extend(['-q', str(quality)])
     else:
       cmd.extend(['-b', str(self.bitrate)])
@@ -272,7 +288,6 @@ class Encoder:
 
     cmd.extend(['-o', str(outputPath)])
     cmd.append(str(inputPath))
-
     logger.info('Encoding to Ogg Vorbis with oggenc')
     logger.debug(f'Command: {" ".join(cmd)}')
 
@@ -291,11 +306,13 @@ class Encoder:
     :type outputPath: Path
     :raises: EncodingError if encoding fails
     """
+
     cmd = [self.toolPath]
 
     if self.tool == self.FDKAAC:
       if self.vbr or self.quality is not None:
         quality = self.quality if self.quality is not None else 4
+
         cmd.extend(['-m', str(quality)])
       else:
         cmd.extend(['-b', str(self.bitrate)])
@@ -305,6 +322,7 @@ class Encoder:
     elif self.tool == self.QAAC:
       if self.vbr or self.quality is not None:
         quality = self.quality if self.quality is not None else 90
+
         cmd.extend(['-V', str(quality)])
       else:
         cmd.extend(['-c', str(self.bitrate)])
@@ -328,4 +346,5 @@ class Encoder:
 
     :rtype: str
     """
+
     return self.format
