@@ -67,7 +67,7 @@ def parseArguments():
     '-f',
     '--format',
     choices=['mp3', 'flac', 'opus', 'ogg', 'm4a'],
-    default=cfg.get('format', 'opus'),
+    default=cfg.get('format', 'mp3'),
     help='Output format (default: %(default)s)',
   )
   formatGroup.add_argument(

@@ -59,7 +59,7 @@ pip install cd-ripper
 ### Basic Usage
 
 ```bash
-# Rip specific tracks to default format (Opus)
+# Rip specific tracks to default format (MP3)
 rip 1 2 3
 
 # Rip all tracks from CD
