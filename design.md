@@ -125,16 +125,17 @@ test/
 
 ### 4. Modern Defaults, Backward Compatible
 
-**Decision:** Default to Opus format but support all original formats
+**Decision:** Default to MP3 format for maximum compatibility, with modern formats available
 
-**Default format:** Opus (best quality-to-size ratio in 2025)
-**Default bitrate:** 192 kbps (or quality 6 for VBR)
+**Default format:** MP3 (best compatibility in 2025)
+**Default bitrate:** 192 kbps (or quality 2 for VBR)
 **Supported formats:** MP3, FLAC, Opus, Ogg Vorbis, AAC/M4A
 
 **Rationale:**
-- Opus is superior to MP3/Ogg Vorbis for modern use
-- Users can still choose MP3/FLAC if preferred
-- Gradually migrate users to better codec
+- MP3 offers universal compatibility across all devices and platforms
+- Opus is available for users wanting superior quality-to-size ratio
+- Users can choose FLAC for lossless archival
+- Maintains backward compatibility with original Perl version defaults
 
 ### 5. MusicBrainz Instead of CDDB
 
