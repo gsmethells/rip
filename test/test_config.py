@@ -1,5 +1,5 @@
 # Copyright (C) 2003 Gregory J. Smethells
-# Copyright (C) 2024 Gregory J. Smethells
+# Copyright (C) 2025 Gregory J. Smethells
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ def test_configCreatesDefaultRiprc(tmp_path, monkeypatch):
   assert riprc.exists()
   assert 'RC FILE VERSION 3' in riprc.read_text()
 
-  assert 'format = "opus"' in riprc.read_text()
+  assert 'format = "mp3"' in riprc.read_text()
 
 
 def test_configLoadsExistingRiprc(tmp_path, monkeypatch):

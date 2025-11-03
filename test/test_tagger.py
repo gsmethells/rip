@@ -1,5 +1,5 @@
 # Copyright (C) 2003 Gregory J. Smethells
-# Copyright (C) 2024 Gregory J. Smethells
+# Copyright (C) 2025 Gregory J. Smethells
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -68,14 +68,14 @@ def test_tagMp3File(tmp_path, mocker):
 
   tag = tagger.Tagger()
   track = metadata.Track(1, 'Test Track', 'Test Artist', 180)
-  album = metadata.Album('Test Album', 'Album Artist', [track], year='2024', genre='Rock')
+  album = metadata.Album('Test Album', 'Album Artist', [track], year='2025', genre='Rock')
 
   tag.tagFile(testFile, track, album)
   assert mockAudio['title'] == 'Test Track'
   assert mockAudio['artist'] == 'Test Artist'
   assert mockAudio['album'] == 'Test Album'
   assert mockAudio['tracknumber'] == '1'
-  assert mockAudio['date'] == '2024'
+  assert mockAudio['date'] == '2025'
   assert mockAudio['genre'] == 'Rock'
   mockSave.assert_called_once()
 
@@ -98,14 +98,14 @@ def test_tagFlacFile(tmp_path, mocker):
 
   tag = tagger.Tagger()
   track = metadata.Track(2, 'FLAC Track', 'FLAC Artist', 200)
-  album = metadata.Album('FLAC Album', 'Album Artist', [track], year='2024')
+  album = metadata.Album('FLAC Album', 'Album Artist', [track], year='2025')
 
   tag.tagFile(testFile, track, album)
   assert mockAudio['title'] == 'FLAC Track'
   assert mockAudio['artist'] == 'FLAC Artist'
   assert mockAudio['album'] == 'FLAC Album'
   assert mockAudio['tracknumber'] == '2'
-  assert mockAudio['date'] == '2024'
+  assert mockAudio['date'] == '2025'
   mockSave.assert_called_once()
 
 
@@ -183,14 +183,14 @@ def test_tagM4aFile(tmp_path, mocker):
 
   tag = tagger.Tagger()
   track = metadata.Track(5, 'AAC Track', 'AAC Artist', 210)
-  album = metadata.Album('AAC Album', 'Album Artist', [track], year='2024', genre='Pop')
+  album = metadata.Album('AAC Album', 'Album Artist', [track], year='2025', genre='Pop')
 
   tag.tagFile(testFile, track, album)
   assert mockAudio['\xa9nam'] == 'AAC Track'
   assert mockAudio['\xa9ART'] == 'AAC Artist'
   assert mockAudio['\xa9alb'] == 'AAC Album'
   assert mockAudio['trkn'] == [(5, 0)]
-  assert mockAudio['\xa9day'] == '2024'
+  assert mockAudio['\xa9day'] == '2025'
   assert mockAudio['\xa9gen'] == 'Pop'
   mockSave.assert_called_once()
 
