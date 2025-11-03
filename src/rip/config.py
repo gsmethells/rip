@@ -83,7 +83,7 @@ superlazy = "-c -t -e"
 kbps = 192
 
 # Sets the default format (mp3, flac, opus, ogg, m4a)
-format = "opus"
+format = "mp3"
 
 # Sets the defaults for quality (only used with -q flag for VBR)
 qualityOPUS = 6

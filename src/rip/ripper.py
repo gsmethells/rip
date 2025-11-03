@@ -214,8 +214,10 @@ class Ripper:
       trackCount = 0
 
       for line in lines:
-        if line.strip() and line[0].isdigit():
-          parts = line.split('.')
+        stripped = line.strip()
+
+        if stripped and stripped[0].isdigit():
+          parts = stripped.split('.')
 
           if parts and parts[0].strip().isdigit():
             trackNum = int(parts[0].strip())
