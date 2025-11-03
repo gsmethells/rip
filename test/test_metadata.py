@@ -1,5 +1,5 @@
 # Copyright (C) 2003 Gregory J. Smethells
-# Copyright (C) 2024 Gregory J. Smethells
+# Copyright (C) 2025 Gregory J. Smethells
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -37,12 +37,12 @@ def test_albumDataclass():
   """Test Album dataclass initialization."""
 
   tracks = [metadata.Track(1, 'Track 1'), metadata.Track(2, 'Track 2')]
-  album = metadata.Album(title='Test Album', artist='Test Artist', tracks=tracks, year='2024')
+  album = metadata.Album(title='Test Album', artist='Test Artist', tracks=tracks, year='2025')
 
   assert album.title == 'Test Album'
   assert album.artist == 'Test Artist'
   assert len(album.tracks) == 2
-  assert album.year == '2024'
+  assert album.year == '2025'
 
 
 def test_albumDefaultsToUnknownAlbum():
@@ -85,7 +85,7 @@ def test_lookupDiscReadsDiscId(mocker):
         {
           'title': 'Test Album',
           'artist-credit': [{'artist': {'name': 'Test Artist'}}],
-          'date': '2024-01-01',
+          'date': '2025-01-01',
           'medium-list': [
             {
               'track-list': [
@@ -162,7 +162,7 @@ def test_parseRelease(mocker):
   release = {
     'title': 'Test Album',
     'artist-credit': [{'artist': {'name': 'Test Artist'}}],
-    'date': '2024-01-01',
+    'date': '2025-01-01',
     'medium-list': [
       {
         'track-list': [
@@ -181,7 +181,7 @@ def test_parseRelease(mocker):
 
   assert album.title == 'Test Album'
   assert album.artist == 'Test Artist'
-  assert album.year == '2024'
+  assert album.year == '2025'
   assert len(album.tracks) == 2
   assert album.tracks[0].title == 'Track 1'
   assert album.tracks[0].duration == 180

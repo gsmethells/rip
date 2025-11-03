@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.0] - 2024-11-02
+## [2.0.0] - 2025-11-02
 
 ### Added
 - Complete Python 3.11+ rewrite of the original Perl script

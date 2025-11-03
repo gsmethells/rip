@@ -285,7 +285,7 @@ See [design.md](design.md) for detailed architecture documentation.
 GNU General Public License v2.0 or later
 
 Copyright (C) 2003 Gregory J. Smethells
-Copyright (C) 2024 Gregory J. Smethells
+Copyright (C) 2025 Gregory J. Smethells
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -297,7 +297,7 @@ See [COPYING](COPYING) for full license text.
 ## Credits
 
 - Original Perl version (2003) by Gregory J. Smethells
-- Python rewrite (2024) by Gregory J. Smethells
+- Python rewrite (2025) by Gregory J. Smethells
 - Uses [MusicBrainz](https://musicbrainz.org/) for metadata
 - Uses [mutagen](https://mutagen.readthedocs.io/) for audio tagging
 
@@ -308,7 +308,7 @@ See [COPYING](COPYING) for full license text.
 
 ## History
 
-**rip 2.0.0** (2024) - Complete Python rewrite
+**rip 2.0.0** (2025) - Complete Python rewrite
 - Modern Python 3.11+ codebase
 - MusicBrainz metadata (replaces defunct CDDB)
 - Multi-format tagging with mutagen

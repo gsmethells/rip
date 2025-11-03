@@ -127,7 +127,7 @@ test/
 
 **Decision:** Default to Opus format but support all original formats
 
-**Default format:** Opus (best quality-to-size ratio in 2024)
+**Default format:** Opus (best quality-to-size ratio in 2025)
 **Default bitrate:** 192 kbps (or quality 6 for VBR)
 **Supported formats:** MP3, FLAC, Opus, Ogg Vorbis, AAC/M4A
 
@@ -345,5 +345,5 @@ dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0", "pytest-mock>=3.12.0", "ruff>=0.1.0
 
 ## Version History
 
-- **v2.0.0-dev** (2024-11): Initial Python rewrite
+- **v2.0.0-dev** (2025-11): Initial Python rewrite
 - **v1.07** (2003-01): Final Perl version
