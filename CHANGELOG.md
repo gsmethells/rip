@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Complete Python 3.11+ rewrite of the original Perl script
 - MusicBrainz metadata integration (replaces defunct CDDB)
 - Interactive release selection for multiple matches
-- Support for Opus format (recommended default)
+- Support for Opus format (superior quality-to-size ratio)
 - Support for AAC/M4A format (via fdkaac or qaac)
 - Multi-format audio tagging with mutagen library
 - M3U and PLS playlist generation
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Structured Album and Track data models
 
 ### Changed
-- Default format changed from MP3 to Opus (better quality/size ratio)
+- Default format remains MP3 for maximum compatibility (Opus available for better quality/size ratio)
 - Default bitrate increased from 160 to 192 kbps
 - Metadata source changed from CDDB to MusicBrainz
 - Configuration file format remains backward compatible
